@@ -34,5 +34,6 @@ public class Area {
         System.out.println("The area of a circle of radius " + radius + " is: " + Circle.getArea(radius));
 
         input.close();
+        System.exit(0);
     }
 }
