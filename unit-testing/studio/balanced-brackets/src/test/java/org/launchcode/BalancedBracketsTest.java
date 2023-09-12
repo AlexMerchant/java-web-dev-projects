@@ -48,7 +48,15 @@ class BalancedBracketsTest {
     // TODO: A string contains a balanced set of brackets but which are improperly nested, should return false
     @Test
     public void stringWithImproperlyNestedBracketsReturnsFalse() {
-        String str = "][[]][][";
+        String str = "][[]][][][";
+        boolean shouldBeFalse = BalancedBrackets.hasBalancedBrackets(str);
+        assertFalse(shouldBeFalse);
+    }
+
+    // TODO: A string contains mismatched braces and brackets, should return false
+    @Test
+    public void stringWithMismatchedBracketsAndBracesReturnsFalse() {
+        String str = "([{]})";
         boolean shouldBeFalse = BalancedBrackets.hasBalancedBrackets(str);
         assertFalse(shouldBeFalse);
     }

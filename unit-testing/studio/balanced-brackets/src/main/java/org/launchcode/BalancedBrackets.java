@@ -43,14 +43,41 @@ public class BalancedBrackets {
         ArrayList<Character> openingBrackets = new ArrayList<>();
         ArrayList<Character> closingBrackets = new ArrayList<>();
 
+        int brackets = 0;
+
         for (char ch : str.toCharArray()) {
             if (ch == '[' || ch == '{' || ch == '(') {
                 openingBrackets.add(ch);
+                brackets++;
+
             } else if (ch == ']' || ch == '}' || ch == ')') {
-                closingBrackets.add(ch);
+                brackets--;
+
+                if (!openingBrackets.isEmpty() && ch == ']') {
+                    if (openingBrackets.get(openingBrackets.size() - 1) != '[') {
+                        return false;
+                    } else {
+                        openingBrackets.remove(openingBrackets.size() - 1);
+                    }
+                } else if (!openingBrackets.isEmpty() && ch == '}') {
+                    if (openingBrackets.get(openingBrackets.size() - 1) != '{') {
+                        return false;
+                    } else {
+                        openingBrackets.remove(openingBrackets.size() - 1);
+                    }
+                } else if (!openingBrackets.isEmpty() && ch == ')') {
+                    if (openingBrackets.get(openingBrackets.size() - 1) != '(') {
+                        return false;
+                    } else {
+                        openingBrackets.remove(openingBrackets.size() - 1);
+                    }
+                } else if (openingBrackets.isEmpty() && (ch == ']' || ch == '}' || ch == ')')) {
+                    return false;
+                }
+//                closingBrackets.add(ch);
             }
         }
-
+/*
         int openingBracketsIndex = openingBrackets.size() - 1;
         int closingBracketsIndex = 0;
 
@@ -80,10 +107,8 @@ public class BalancedBrackets {
                 System.out.println("Braces mismatch");
                 return false;
             }
-        }
-
-        return true;
-
+        }*/
+        return brackets == 0;
     }
 
 //    public static void main(String[] args) {
