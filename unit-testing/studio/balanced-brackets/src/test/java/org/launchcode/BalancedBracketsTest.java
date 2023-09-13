@@ -156,30 +156,36 @@ class BalancedBracketsTest {
         assertEquals(expected, actual, msg);
     }
 
-
-
-
-
-    // TODO: A string containing more than just brackets that are not balanced should return false.
     @Test
-    public void stringWithUnbalancedBracketsReturnsFalse() {
-        boolean shouldBeFalse = BalancedBrackets.hasBalancedBrackets("This String has ]an unbalanced [set of] brackets].");
-        assertFalse(shouldBeFalse);
+    public void properPairThenMismatch() {
+        String msg = "A string that has a proper pair followed by unbalanced pairs should return false";
+        boolean expected = false;
+        boolean actual = BalancedBrackets.hasBalancedBrackets("[]({(})");
+        assertEquals(expected, actual, msg);
     }
 
-    // TODO: A string contains a balanced set of brackets but which are improperly nested, should return false
     @Test
-    public void stringWithImproperlyNestedBracketsReturnsFalse() {
-        String str = "][[]][][][";
-        boolean shouldBeFalse = BalancedBrackets.hasBalancedBrackets(str);
-        assertFalse(shouldBeFalse);
+    public void stringStartingWithCloserAndEndingWithOpener() {
+        String msg = "A string that starts with a closer and ends with an opener is unbalanced and should return false";
+        boolean expected = false;
+        boolean actual = BalancedBrackets.hasBalancedBrackets("][[]][][][");
+        assertEquals(expected, actual, msg);
+
+        actual = BalancedBrackets.hasBalancedBrackets("}[[]())]{");
+        assertEquals(expected, actual, msg);
+
+        actual = BalancedBrackets.hasBalancedBrackets(")()[]{}(");
+        assertEquals(expected, actual, msg);
     }
 
-    // TODO: A string contains mismatched braces and brackets, should return false
     @Test
-    public void stringWithMismatchedBracketsAndBracesReturnsFalse() {
-        String str = "([{]})";
-        boolean shouldBeFalse = BalancedBrackets.hasBalancedBrackets(str);
-        assertFalse(shouldBeFalse);
+    public void stringWithMismatchedPairs() {
+        String msg = "A string that has mismatched pairs of openers and closers should return false";
+        boolean expected = false;
+        boolean actual = BalancedBrackets.hasBalancedBrackets("([{]})");
+        assertEquals(expected, actual, msg);
+
+        actual = BalancedBrackets.hasBalancedBrackets("({{])");
+        assertEquals(expected, actual, msg);
     }
 }
